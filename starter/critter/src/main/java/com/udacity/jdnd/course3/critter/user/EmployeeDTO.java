@@ -13,6 +13,7 @@ public class EmployeeDTO {
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
 
+
     public long getId() {
         return id;
     }
