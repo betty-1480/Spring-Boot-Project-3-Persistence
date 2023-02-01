@@ -13,7 +13,7 @@ public class Pet {
     @Id
     @GeneratedValue
     @Column(name = "PET_ID")
-    private long id;
+    private Long id;
 
     @Column(name="PET_TYPE")
     private PetType type;
@@ -32,19 +32,6 @@ public class Pet {
 
     @Column(name="NOTES")
     private String notes;
-
-    // @Entity class should have a public/ protected non-argument constructor
-    public Pet() {
-
-    }
-
-    public Pet(long id, PetType type, String name, Customer owner, LocalDate birthDate) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.owner = owner;
-        this.birthDate = birthDate;
-    }
 
     public long getId() {
         return id;
