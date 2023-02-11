@@ -25,7 +25,7 @@ public class Pet {
     //Bidirectional, many pets belong to one owner
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CUSTOMER_ID") // many side of the relationship should have a physical column
-    private Customer owner;
+    private Customer owner=new Customer();
 
     @Column(name="PET_BIRTH_DATE")
     private LocalDate birthDate;
@@ -33,11 +33,11 @@ public class Pet {
     @Column(name="NOTES")
     private String notes;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,6 +63,7 @@ public class Pet {
 
     public void setOwner(Customer owner) {
         this.owner = owner;
+
     }
 
     public LocalDate getBirthDate() {

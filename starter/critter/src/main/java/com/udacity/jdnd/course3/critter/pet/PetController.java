@@ -21,10 +21,11 @@ public class PetController {
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        Long id= petService.savePet(convertPetDTOToEntity(petDTO));
-        petDTO.setId(id);
-        System.out.println(petDTO.getOwnerId());
-        return petDTO;
+        Pet pet = petService.savePet(convertPetDTOToEntity(petDTO));
+        return convertPetEntityToDTO(pet);
+
+       // petDTO.setId(id); Wrong
+       // return petDTO;    Wrong
         //throw new UnsupportedOperationException();
     }
 
@@ -49,6 +50,7 @@ public class PetController {
 
     public Pet convertPetDTOToEntity(PetDTO petDTO){
         Pet pet = new Pet();
+        pet.getOwner().setId(petDTO.getOwnerId()); //Pet's owner only has id now. All other fields of owner are empty.
         BeanUtils.copyProperties(petDTO,pet);
         return pet;
     }
@@ -56,6 +58,7 @@ public class PetController {
     public PetDTO convertPetEntityToDTO(Pet pet){
         PetDTO petDTO=new PetDTO();
         BeanUtils.copyProperties(pet,petDTO);
+        petDTO.setOwnerId(pet.getOwner().getId());
         return petDTO;
     }
 

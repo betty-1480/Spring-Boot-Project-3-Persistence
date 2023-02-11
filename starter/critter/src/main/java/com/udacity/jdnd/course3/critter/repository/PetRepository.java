@@ -14,5 +14,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     //No code!
     //What a magic!!
 
-    List<Pet> findPetsByOwner(long ownerId);
+    List<Pet> findPetsByOwnerId(long ownerId); //Spring-Data-JPA Tool: method names automatically create JPQL!!
 }

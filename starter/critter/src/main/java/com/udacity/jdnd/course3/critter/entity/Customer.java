@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.entity;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Customer {
 
     //Bidirectional, one owner can have multiple pets.
     @OneToMany(mappedBy="owner", cascade = CascadeType.ALL)
-    private List<Pet> pets;
+    private List<Pet> pets =new ArrayList<>();
 
     // @Entity class should have a public/ protected non-argument constructor
     public Customer() {

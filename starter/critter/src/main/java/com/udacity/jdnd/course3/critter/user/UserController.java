@@ -2,6 +2,7 @@ package com.udacity.jdnd.course3.critter.user;
 
 import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
+import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
 import com.udacity.jdnd.course3.critter.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -48,7 +49,8 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+        return convertCustomerEntityToDTO(customerService.findOwnerByPet(petId));
+        //throw new UnsupportedOperationException();
     }
 
     @PostMapping("/employee")
@@ -70,15 +72,6 @@ public class UserController {
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
         throw new UnsupportedOperationException();
-
-
-
-
-
-
-
-
-
     }
 
     @GetMapping("/employee/availability")
@@ -89,6 +82,7 @@ public class UserController {
     public  CustomerDTO convertCustomerEntityToDTO(Customer customer){
         CustomerDTO customerDTO=new CustomerDTO();
         BeanUtils.copyProperties(customer,customerDTO);
+        customerDTO.setPetIds(customer.getPets().stream().map(Pet::getId).collect(Collectors.toList()));
         return customerDTO;
     }
 
