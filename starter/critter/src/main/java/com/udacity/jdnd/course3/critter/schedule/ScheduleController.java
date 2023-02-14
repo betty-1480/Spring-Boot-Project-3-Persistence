@@ -84,9 +84,11 @@ public class ScheduleController {
         ScheduleDTO scheduleDTO=new ScheduleDTO();
         BeanUtils.copyProperties(schedule,scheduleDTO);
 
+        //Explicit mapping ie required
         List<Long> petIds=schedule.getPets().stream().map(Pet::getId).collect(Collectors.toList());
         scheduleDTO.setPetIds(petIds);
 
+        //Explicit mapping is required
         List<Long> employeeIds=schedule.getEmployees().stream().map(Employee::getId).collect(Collectors.toList());
         scheduleDTO.setEmployeeIds(employeeIds);
 

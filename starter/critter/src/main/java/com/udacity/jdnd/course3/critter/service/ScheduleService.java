@@ -2,14 +2,14 @@ package com.udacity.jdnd.course3.critter.service;
 
 import com.udacity.jdnd.course3.critter.entity.Schedule;
 import com.udacity.jdnd.course3.critter.repository.ScheduleRepository;
-import com.udacity.jdnd.course3.critter.schedule.ScheduleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional // will declare all methods of the class transactional
 public class ScheduleService {
 
     @Autowired

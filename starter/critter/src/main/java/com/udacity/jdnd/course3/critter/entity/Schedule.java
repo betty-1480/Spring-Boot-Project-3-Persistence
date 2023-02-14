@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name="SCHEDULE")
 public class Schedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="SCHEDULE_ID")
     private long id;
 
