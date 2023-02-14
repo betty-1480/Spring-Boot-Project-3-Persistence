@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -55,10 +56,10 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        Employee employee=convertEmployeeDTOToEntity(employeeDTO);
+       Employee employee=convertEmployeeDTOToEntity(employeeDTO);
        long id= employeeService.saveEmployee(employee);
-        employeeDTO.setId(id);
-        return employeeDTO;
+       employeeDTO.setId(id);
+       return employeeDTO;
         //throw new UnsupportedOperationException();
     }
 
@@ -71,13 +72,25 @@ public class UserController {
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        Employee employee=employeeService.getEmployeeById(employeeId);
+        employeeService.setAvailability(daysAvailable, employee);
+        //throw new UnsupportedOperationException();
     }
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Set<EmployeeSkill> skills = employeeDTO.getSkills();
+        DayOfWeek dayOfWeek = employeeDTO.getDate().getDayOfWeek();
+        List<Employee> employees = employeeService.findEmployeesForService(skills,dayOfWeek);
+        List<Employee> availableEmployees = new ArrayList<>();
+        for(Employee e : employees){
+            if(e.getSkills().containsAll(skills)) {
+                availableEmployees.add(e);
+            }
+        }
+        return availableEmployees.stream().map(this::convertEmployeeEntityToDTO).collect(Collectors.toList());
     }
+
 
     public  CustomerDTO convertCustomerEntityToDTO(Customer customer){
         CustomerDTO customerDTO=new CustomerDTO();

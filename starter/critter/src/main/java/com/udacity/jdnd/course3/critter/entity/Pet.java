@@ -13,7 +13,7 @@ public class Pet {
     @Id
     @GeneratedValue
     @Column(name = "PET_ID")
-    private Long id;
+    private long id;
 
     @Column(name="PET_TYPE")
     private PetType type;
@@ -33,11 +33,11 @@ public class Pet {
     @Column(name="NOTES")
     private String notes;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

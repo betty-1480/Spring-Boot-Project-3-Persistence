@@ -24,8 +24,8 @@ public class PetController {
         Pet pet = petService.savePet(convertPetDTOToEntity(petDTO));
         return convertPetEntityToDTO(pet);
 
-       // petDTO.setId(id); Wrong
-       // return petDTO;    Wrong
+       // petDTO.setId(id); Wrong - not needed, why??
+       // return petDTO;    Wrong - not needed, why??
         //throw new UnsupportedOperationException();
     }
 

@@ -23,9 +23,6 @@ public class PetService {
         if (customerService.getCustomerById(pet.getOwner().getId())==null) {
             throw new UnsupportedOperationException(); // if a Customer with Pet's ownerId does not exist in the DB
         }
-
-        if (pet.getId()<=0)
-            pet.setId(null);
         Long ownerId = pet.getOwner().getId(); //ownerId is coming from the PetDTO
         Customer owner=customerService.getCustomerById(ownerId); // get Customer with same Id as PetDTO's ownerId from database
         pet.setOwner(owner); //Pet class needs an owner not ownerId. Yet Pet table needs ownerId
